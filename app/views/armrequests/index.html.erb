@@ -1,0 +1,81 @@
+<style>
+    .toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px; }
+    .toggle.ios .toggle-handle { border-radius: 20px; }
+</style>
+<div class="section">
+  <div class="section-header">
+    <h1>Arms Requests Table</h1>
+    <div class="section-header-breadcrumb">
+      <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
+      <div class="breadcrumb-item"><a href="#">Arm Requests</a></div>
+      <div class="breadcrumb-item">Index</div>
+    </div>
+  </div>
+
+  <div class="section-body">
+    <h2 class="section-title">Arm Requests Table</h2>
+    <p class="section-lead">All recorded Requests</p>
+
+    <div class="row">
+      <div class="col-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <h4>Requests</h4><b style="padding-left: 80%"><a class="btn btn-success " href="/armrequests/new">New Request</a></b>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered table-md">
+                <thead>
+                <tr>
+                  <th>Personnel</th>
+                  <th>Arm</th>
+                  <th>Request Date</th>
+                  <th>Return Status</th>
+                  <th>Approve Return</th>
+                  <th>Return Date</th>
+                  <th>Show</th>
+                  <th>Edit</th>
+                  <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% @armreq.each do |armreq| %>
+                  <tr>
+                    <td><%= armreq.personnel %></td>
+                    <td><%= armreq.arm %></td>
+                    <td><%= armreq.request_date %></td>
+                    <td><%= armreq.return_status %></td>
+                    <td><input type="checkbox" id="approve" data-toggle="toggle" data-size="small" data-id="<%= armreq.id %>" data-onstyle="success" data-on="Returned" data-off="Unreturned"></td>
+                    <td><%= armreq.return_date %></td>
+                    <td><a class="btn btn-icon btn-info" href="/armrequests/<%= armreq.id %>"><i class="fas fa-info-circle"></i></a></td>
+                    <td><a class="btn btn-icon btn-primary" href="/armrequests/<%= armreq.id %>/edit"><i class="far fa-edit"></i></a></td>
+                    <td><a data-confirm="Are you sure?" class="btn btn-icon btn-danger" rel="nofollow" data-method="delete" href="/armrequests/<%= armreq.id %>"><i class="fas fa-times"></i></a></td>
+                  </tr>
+                <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $(document).ready(function () {
+      $('#approve').change(function () {
+          var status = $(this).prop('checked') === true ? 'Returned' : 'Unreturned';
+          var id = $(this).data('id');
+
+          $.ajax({
+              type: "GET",
+              dataType: "json",
+              url: '/updatereqstat',
+              data: {'status': status, 'id': id},
+              success: function(data){
+                  console.log(data.success)
+              }
+          });
+      })
+  })
+</script>

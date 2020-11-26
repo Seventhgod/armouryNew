@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  personnel: MyString
+  arm: MyString
+  srl_num: MyString
+  return_date: MyString
+
+two:
+  personnel: MyString
+  arm: MyString
+  srl_num: MyString
+  return_date: MyString

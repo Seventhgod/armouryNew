@@ -1,0 +1,68 @@
+<section class="section">
+  <div class="section-header">
+    <h4>Edit Arm</h4>
+    <div class="section-header-breadcrumb">
+      <div class="breadcrumb-item active"><a href="/trial/index">Dashboard</a></div>
+      <div class="breadcrumb-item"><a href="/arms">Arms</a></div>
+      <div class="breadcrumb-item">Edit</div>
+    </div>
+  </div>
+
+  <div class="section-body">
+    <h2 class="section-title">Edit</h2>
+    <p class="section-lead">
+      Edit <%= @arms.arm_name %> Details
+    </p>
+
+    <div class="card">
+      <div class="card-header">
+        <h4>Edit Arm</h4>
+      </div>
+      <div class="card-body">
+        <%= form_for @arms do |f| %>
+          <div class="form-row">
+            <div class="form-group col-sm-6">
+              <%=f.label 'Serial Number' %>
+              <%= f.text_field :srl_num, class: "form-control", required: "true"%>
+            </div>
+            <div class="form-group col-md-6">
+              <%= f.label :arm_name %>
+              <%= f.text_field :arm_name, class:"form-control", required: "true" %>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-sm-6">
+              <%=f.label :arm_type %>
+              <select class="form-control" name="arm[arm_type]" id="arm_arm_type" required>
+                <option>Select Arm Type</option>
+                <option value="Heavy">Heavy</option>
+                <option value="Small">Small</option>
+                <option value="Light">Light</option>
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+              <%= f.label :quantity %>
+              <%= f.number_field :quantity, class:"form-control", required: "true" %>
+            </div>
+          </div>
+          <div class="form-group">
+            <%= f.label :servicability %>
+            <select class="form-control" name="arm[service_b]" id="arm_service_b" required>
+              <option>Select Serviceability</option>
+              <option value="Serviceable">Serviceable</option>
+              <option value="Unserviceable">Unserviceable</option>
+            </select>
+          </div>
+          <div class="card-footer">
+            <input type="submit" name="commit" value="Update" data-disable-with="Update" class="btn btn-primary"/>   <a href="/arms" class="btn btn-default">Back</a>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+    $('#arm_arm_type').select2({
+
+    });
+</script>

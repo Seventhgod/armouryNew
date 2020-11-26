@@ -1,0 +1,54 @@
+<section class="section">
+  <div class="section-header">
+    <h4>Arm Details</h4>
+    <div class="section-header-breadcrumb">
+      <div class="breadcrumb-item active"><a href="/trial/index">Dashboard</a></div>
+      <div class="breadcrumb-item"><a href="/arms">Arms</a></div>
+      <div class="breadcrumb-item">Show</div>
+    </div>
+  </div>
+
+  <div class="section-body">
+    <h2 class="section-title">Show Arm</h2>
+    <p class="section-lead">
+      Arm Details
+    </p>
+
+    <div class="card">
+      <div class="card-header">
+        <h4><%= @arms.arm_name %> Details</h4>
+      </div>
+      <div class="card-body">
+        <%= form_for @arms do |f| %>
+          <div class="form-row">
+            <div class="form-group col-sm-6">
+              <%=f.label 'Serial Number' %>
+              <%= @arms.srl_num %>
+            </div>
+            <div class="form-group col-md-6">
+              <%= f.label :arm_name %>
+              <%= @arms.arm_name %>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-sm-6">
+              <%=f.label :arm_type %>
+              <%= @arms.arm_type %>
+            </div>
+            <div class="form-group col-md-6">
+              <%= f.label :quantity %>
+              <%= @arms.quantity %>
+            </div>
+          </div>
+          <div class="form-group">
+            <%= f.label :serviceability %>
+            <%= @arms.service_b %>
+          </div>
+          <div class="card-footer">
+            <a href="/arms" class="btn btn-default">Back</a>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

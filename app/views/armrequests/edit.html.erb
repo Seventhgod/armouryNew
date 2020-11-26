@@ -1,0 +1,70 @@
+<section class="section">
+  <div class="section-header">
+    <h4>Make a Request</h4>
+    <div class="section-header-breadcrumb">
+      <div class="breadcrumb-item active"><a href="/trial/index">Dashboard</a></div>
+      <div class="breadcrumb-item"><a href="/armrequests">Requests</a></div>
+      <div class="breadcrumb-item">Edit</div>
+    </div>
+  </div>
+
+  <div class="section-body">
+    <h2 class="section-title">Edit Request</h2>
+    <p class="section-lead">
+      Edit Request
+    </p>
+
+    <div class="card">
+      <div class="card-header">
+        <h4>Edit Request</h4>
+      </div>
+      <div class="card-body">
+        <%= form_for @armreq do |f| %>
+          <div class="form-row">
+            <div class="form-group col-sm-6">
+              <%=f.label :personnel %>
+              <%= f.text_field :personnel, class: "form-control", required: "true"%>
+            </div>
+            <div class="form-group col-md-6">
+              <%=f.label :arm_type %>
+              <select class="form-control" name="armrequests[arm_type]" id="armrequests_arm_type" required>
+                <option>Select Arm Type</option>
+                <option value="Heavy">Heavy</option>
+                <option value="Small">Small</option>
+                <option value="Light">Light</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-sm-6">
+              <%= f.label :arm %>
+              <%= f.text_field :arm, class:"form-control", required: "true" %>
+            </div>
+            <div class="form-group col-md-6">
+              <%= f.label :user %>
+              <%= f.text_field :user, class:"form-control", readonly: "true", value: current_user.name %>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <%= f.label :request_date %>
+              <%= f.date_field :request_date, class:"form-control" %>
+            </div>
+
+            <div class="form-group col-md-6">
+              <%= f.label :return_status %>
+              <%= f.text_field :return_status, class:"form-control", readonly: "true", value: "Unreturned" %>
+            </div>
+          </div>
+
+          <div class="card-footer">
+            <input type="submit" name="commit" value="Update" data-disable-with="Update" class="btn btn-primary"/>   <a href="/armrequests" class="btn btn-default">Back</a>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+    $('#arm_arm_type').select2();
+</script>
