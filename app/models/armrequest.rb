@@ -1,0 +1,2 @@
+class Armrequest < ApplicationRecord
+end
