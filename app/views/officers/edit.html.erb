@@ -1,0 +1,73 @@
+<section class="section">
+  <div class="section-header">
+    <h4>Edit Request</h4>
+    <div class="section-header-breadcrumb">
+      <div class="breadcrumb-item active"><a href="/trial/index">Dashboard</a></div>
+      <div class="breadcrumb-item"><a href="/officers">Officers</a></div>
+      <div class="breadcrumb-item">Edit</div>
+    </div>
+  </div>
+
+  <div class="section-body">
+    <h2 class="section-title">Edit</h2>
+    <p class="section-lead">
+      Edit Details for Officer
+    </p>
+
+    <div class="card">
+      <div class="card-header">
+        <h4>Officers</h4>
+      </div>
+      <div class="card-body">
+        <%= form_for @officers do |f| %>
+          <div class="form-row">
+            <div class="form-group col-sm-6">
+              <%= f.label 'Service Number' %>
+              <%= f.text_field :svc_number, class: "form-control", required: "true"%>
+            </div>
+            <div class="form-group col-md-6">
+              <%= f.label :rank %>
+              <%= f.text_field :rank, class:"form-control", required: "true" %>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-sm-6">
+              <%=f.label :name %>
+              <%= f.text_field :name, class:"form-control", required: true %>
+            </div>
+            <div class="form-group col-md-6">
+              <%= f.label :gender %>
+              <select class="form-control" name="officer[gender]" id="officer_gender" required>
+                <option>Select Gender</option>
+                <option value="Female">Female</option>
+                <option value="Male">Male</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <%= f.label "Date Of Birth" %>
+              <%= f.date_field :dob, class: "form-control", required:true %>
+            </div>
+            <div class="form-group col-md-6">
+              <%= f.label :commission_date %>
+              <%= f.date_field :commission_date, class:"form-control", required: true %>
+            </div>
+          </div>
+          <div class="form-group">
+            <%= f.label :seniority_date %>
+            <%= f.date_field :seniority_date, class: "form-control", required:true %>
+          </div>
+          <div class="card-footer">
+            <input type="submit" name="commit" value="Save" data-disable-with="Save" class="btn btn-primary"/>   <a href="/officers" class="btn btn-default">Back</a>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+    $('#soldier_gender').select2({
+
+    });
+</script>

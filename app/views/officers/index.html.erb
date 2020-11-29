@@ -1,0 +1,61 @@
+<div class="section">
+  <div class="section-header">
+    <h1>Officers</h1>
+    <div class="section-header-breadcrumb">
+      <div class="breadcrumb-item active"><a href="/trial/index">Dashboard</a></div>
+      <div class="breadcrumb-item"><a href="/officers">Officers</a></div>
+      <div class="breadcrumb-item">Index</div>
+    </div>
+  </div>
+
+  <div class="section-body">
+    <h2 class="section-title">Officers Table</h2>
+    <p class="section-lead">Recorded Data (Officers)</p>
+
+    <div class="row">
+      <div class="col-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <h4>Officers</h4><b style="padding-left: 80%"><a class="btn btn-success " href="/officers/new">Add New</a></b>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered table-md">
+                <thead>
+                <tr>
+                  <th>Service Number</th>
+                  <th>Rank</th>
+                  <th>Name</th>
+                  <th>Gender</th>
+                  <th>Date of Birth</th>
+                  <th>Commission Date</th>
+                  <th>Seniority Date</th>
+                  <th>Show</th>
+                  <th>Edit</th>
+                  <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% @officers.each do |officer| %>
+                  <tr>
+                    <td><%= officer.svc_number %></td>
+                    <td><%= officer.rank %></td>
+                    <td><%= officer.name %></td>
+                    <td><%= officer.gender %></td>
+                    <td><%= officer.dob %></td>
+                    <td><%= officer.commission_date %></td>
+                    <td><%= officer.seniority_date %></td>
+                    <td><a class="btn btn-icon btn-info" href="/officers/<%= officer.id %>"><i class="fas fa-info-circle"></i></a></td>
+                    <td><a class="btn btn-icon btn-primary" href="/officers/<%= officer.id %>/edit"><i class="far fa-edit"></i></a></td>
+                    <td><a data-confirm="Are you sure?" class="btn btn-icon btn-danger" rel="nofollow" data-method="delete" href="/officers/<%= officer.id %>"><i class="fas fa-times"></i></a></td>
+                  </tr>
+                <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
