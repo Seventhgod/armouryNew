@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  svc_nuumber: MyString
+  rank: MyString
+  name: MyString
+  gender: MyString
+  dob: 2020-11-26
+  commission_date: 2020-11-26
+  seniority_date: 2020-11-26
+
+two:
+  svc_nuumber: MyString
+  rank: MyString
+  name: MyString
+  gender: MyString
+  dob: 2020-11-26
+  commission_date: 2020-11-26
+  seniority_date: 2020-11-26

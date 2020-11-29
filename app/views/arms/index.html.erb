@@ -1,9 +1,9 @@
 <div class="section">
   <div class="section-header">
-    <h1>Arms Table</h1>
+    <h1>Arms</h1>
     <div class="section-header-breadcrumb">
       <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-      <div class="breadcrumb-item"><a href="#">Arms</a></div>
+      <div class="breadcrumb-item"><a href="/arms">Arms</a></div>
       <div class="breadcrumb-item">Index</div>
     </div>
   </div>
@@ -26,7 +26,6 @@
                   <th>Serial Num</th>
                   <th>Name</th>
                   <th>Type</th>
-                  <th>Quantity</th>
                   <th>Serviceability</th>
                   <th>Show</th>
                   <th>Edit</th>
@@ -39,7 +38,6 @@
                     <td><%= arm.srl_num %></td>
                     <td><%= arm.arm_name %></td>
                     <td><%= arm.arm_type %></td>
-                    <td><%= arm.quantity %></td>
                     <td><%= arm.service_b %></td>
                     <td><a class="btn btn-icon btn-info" href="/arms/<%= arm.id %>"><i class="fas fa-info-circle"></i></a></td>
                     <td><a class="btn btn-icon btn-primary" href="/arms/<%= arm.id %>/edit"><i class="far fa-edit"></i></a></td>

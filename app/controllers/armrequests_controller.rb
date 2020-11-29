@@ -6,15 +6,12 @@ class ArmrequestsController < ApplicationController
 
   def new
     @armreq = Armrequest.new
+    @arm = Arm.all.select('arm_name')
   end
 
   def create
     @armreq = Armrequest.new(armreqparams)
-    @armcount = Arm.where('arm_name = ?', @armreq.arm).select('id', 'quantity')
     if @armreq.save
-      @save = Arm.find(@armcount[0]['id'])
-      @save.quantity = @armcount[0]['quantity']-1
-      @save.save
       flash[:success] = 'Request Made Successfully'
       redirect_to armrequests_path
     else
@@ -29,6 +26,7 @@ class ArmrequestsController < ApplicationController
 
   def edit
     @armreq = Armrequest.find(params[:id])
+    @arm = Arm.all.select('arm_name')
   end
 
   def update
@@ -55,19 +53,52 @@ class ArmrequestsController < ApplicationController
 
   def updatereqstat
     @armreq = Armrequest.find(params[:id])
-    @armcount = Arm.where('arm_name = ?', @armreq.arm).select('id', 'quantity')
-    @save = Arm.find(@armcount[0]['id'])
-    @save.quantity = @armcount[0]['quantity'] + 1
-    @save.save
     @armreq.return_status = params[:status]
     @armreq.return_date = Date.today.to_date
     @armreq.save
-    ArmReturn.create(personnel: @armreq.personnel, arm: @armreq.arm, srl_num: @save.srl_num, return_date: @armreq.return_date)
+    ArmReturn.create(personnel: @armreq.personnel, arm: @armreq.arm, srl_num: @armreq.srl_num, return_date: @armreq.return_date)
+  end
+
+  def getarms
+    if params[:arm].present?
+      @arm_srl = Arm.where('arm_name =?', params[:arm]).select('srl_num')
+    else
+      @arm_srl = Arm.all
+    end
+    if request.xhr?
+      respond_to do |format|
+        format.json{
+          render json: {srl_num: @arm_srl}
+        }
+      end
+    end
+  end
+
+  def getsoldiers
+    @soldier = Soldier.all
+    if request.xhr?
+      respond_to do |format|
+        format.json{
+          render json: {svc_number: @soldier}
+        }
+      end
+    end
+  end
+
+  def getofficers
+    @officer = Officer.all
+    if request.xhr?
+      respond_to do |format|
+        format.json{
+          render json: {svc_number: @officer}
+        }
+      end
+    end
   end
 
   private
   def armreqparams
-    params.require(:armrequest).permit(:personnel, :arm_type, :arm, :user, :request_date, :return_status)
+    params.require(:armrequest).permit(:personnel, :arm, :srl_num, :user, :request_date, :return_status)
   end
 
 end

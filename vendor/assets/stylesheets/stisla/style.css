@@ -768,7 +768,7 @@ select.form-control:not([size]):not([multiple]) {
   .card.card-statistic-1 .card-header h4,
   .card.card-statistic-2 .card-header h4 {
     line-height: 1.2;
-    color: #98a6ad; }
+    color: #000000; }
   .card.card-statistic-1 .card-body,
   .card.card-statistic-2 .card-body {
     padding-top: 0; }
@@ -1951,7 +1951,7 @@ body {
   font-size: 14px;
   font-weight: 400;
   font-family: "Nunito", "Segoe UI", arial;
-  color: #6c757d; }
+  color: #000000; }
 
 a.bb {
   text-decoration: none;
@@ -2793,7 +2793,7 @@ body.layout-3 .main-footer {
       padding: 0 20px;
       width: 100%;
       letter-spacing: .3px;
-      color: #78828a;
+      color: #000000;
       text-decoration: none; }
       .main-sidebar .sidebar-menu li a .badge {
         float: right;
@@ -2840,7 +2840,7 @@ body.layout-3 .main-footer {
       box-shadow: none;
       background-color: transparent; }
       .main-sidebar .sidebar-menu li ul.dropdown-menu li a {
-        color: #868e96;
+        color: #000000;
         height: 35px;
         padding-left: 65px;
         font-weight: 400; }

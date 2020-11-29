@@ -1,2 +1,59 @@
-<h1>Soldiers#index</h1>
-<p>Find me in app/views/soldiers/index.html.erb</p>
+<div class="section">
+  <div class="section-header">
+    <h1>Soldiers</h1>
+    <div class="section-header-breadcrumb">
+      <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
+      <div class="breadcrumb-item"><a href="/soldiers">Soldiers</a></div>
+      <div class="breadcrumb-item">Index</div>
+    </div>
+  </div>
+
+  <div class="section-body">
+    <h2 class="section-title">Soldiers Table</h2>
+    <p class="section-lead">Recorded Data (Soldiers)</p>
+
+    <div class="row">
+      <div class="col-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <h4>Soldiers</h4><b style="padding-left: 80%"><a class="btn btn-success " href="/soldiers/new">Add New</a></b>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered table-md">
+                <thead>
+                <tr>
+                  <th>Service Number</th>
+                  <th>Rank</th>
+                  <th>Name</th>
+                  <th>Gender</th>
+                  <th>Date of Birth</th>
+                  <th>Unit</th>
+                  <th>Show</th>
+                  <th>Edit</th>
+                  <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% @soldiers.each do |soldier| %>
+                  <tr>
+                    <td><%= soldier.svc_number %></td>
+                    <td><%= soldier.rank %></td>
+                    <td><%= soldier.name %></td>
+                    <td><%= soldier.gender %></td>
+                    <td><%= soldier.dob %></td>
+                    <td><%= soldier.unit %></td>
+                    <td><a class="btn btn-icon btn-info" href="/soldiers/<%= soldier.id %>"><i class="fas fa-info-circle"></i></a></td>
+                    <td><a class="btn btn-icon btn-primary" href="/soldiers/<%= soldier.id %>/edit"><i class="far fa-edit"></i></a></td>
+                    <td><a data-confirm="Are you sure?" class="btn btn-icon btn-danger" rel="nofollow" data-method="delete" href="/soldiers/<%= soldier.id %>"><i class="fas fa-times"></i></a></td>
+                  </tr>
+                <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

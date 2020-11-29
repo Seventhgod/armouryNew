@@ -47,6 +47,6 @@ class ArmsController < ApplicationController
 
   private
   def arms_params
-    params.require(:arm).permit(:srl_num, :arm_name, :arm_type, :quantity, :service_b)
+    params.require(:arm).permit(:srl_num, :arm_name, :arm_type, :service_b)
   end
 end

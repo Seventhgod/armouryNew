@@ -20,5 +20,6 @@
     <section class="section">
       <%= content_for?(:content) ? yield(:content) : yield %>
     </section>
+    <%= render 'shared/toastr' %>
   </div>
 </html>

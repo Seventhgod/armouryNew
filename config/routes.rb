@@ -2,6 +2,7 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
   get 'trial/index'
+  resources :officers
   resources :arms
   resources :trial
   resources :armrequests
@@ -14,5 +15,8 @@ Rails.application.routes.draw do
     root 'devise/sessions#new'
   end
   get '/updatereqstat', to: 'armrequests#updatereqstat'
+  get '/getarmname', to: 'armrequests#getarms'
+  get '/getsoldiers', to: 'armrequests#getsoldiers'
+  get '/getofficers', to: 'armrequests#getofficers'
   mount Sidekiq::Web => '/sidekiq'
 end

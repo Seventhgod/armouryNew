@@ -1,7 +1,100 @@
 <section class="section">
   <div class="section-header">
-  <h1>Trial Page</h1>
+    <h1>Dashboard</h1>
   </div>
-  <h1>Trial#index</h1>
-  <p>Find me in app/views/trial/index.html.erb</p>
+  <div class="row">
+    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+      <div class="card card-statistic-1">
+        <div class="card-icon bg-primary">
+          <i class="far fa-user"></i>
+        </div>
+        <div class="card-wrap">
+          <div class="card-header">
+            <h4>Users</h4>
+          </div>
+          <div class="card-body">
+            <%= @user %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+      <div class="card card-statistic-1">
+        <div class="card-icon bg-success">
+          <i class="far fa-newspaper"></i>
+        </div>
+        <div class="card-wrap">
+          <div class="card-header">
+            <h4>Requests</h4>
+          </div>
+          <div class="card-body">
+            <%= @armreq %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+      <div class="card card-statistic-1">
+        <div class="card-icon bg-warning">
+          <i class="far fa-file"></i>
+        </div>
+        <div class="card-wrap">
+          <div class="card-header">
+            <h4>Arms</h4>
+          </div>
+          <div class="card-body">
+            <%= @arms %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+      <div class="card card-statistic-1">
+        <div class="card-icon bg-info">
+          <i class="fas fa-circle"></i>
+        </div>
+        <div class="card-wrap">
+          <div class="card-header">
+            <h4>Returned Arms</h4>
+          </div>
+          <div class="card-body">
+            <%= @armret %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12 col-md-12 col-12">
+    <div class="card">
+      <div class="card-header">
+        <h4>Basic Statistics</h4>
+        <div class="card-header-action">
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="summary">
+          <div class="summary-info">
+            <h4><%= @armreq %></h4>
+            <div class="text-muted"><%= @armreqtime %> requests made today</div>
+            <div class="d-block mt-2">
+              <a href="/armrequests">View All</a>
+            </div>
+          </div>
+          <div class="summary-item">
+            <h6>Available Arms <span class="text-muted"><%= @arms %> Arm(s)</span></h6>
+            <ul class="list-unstyled list-unstyled-border">
+              <li class="media">
+                <div class="media-body">
+                  <div class="media-right"><%= @armss.srl_num %></div>
+                  <div class="media-title"><a href="#"><%= @armss.arm %></a></div>
+                  <div class="text-muted text-small">by <a href="#"><%= @armss.user %></a> <div class="bullet"></div> <%= @armss.request_date %></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
