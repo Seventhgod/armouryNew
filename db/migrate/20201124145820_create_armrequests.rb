@@ -6,6 +6,7 @@ class CreateArmrequests < ActiveRecord::Migration[6.0]
       t.string :arm
       t.integer :quantity
       t.string :user
+      t.string :return_status
       t.date :request_date
       t.date :return_date
 

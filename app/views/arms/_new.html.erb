@@ -1,0 +1,53 @@
+<div class="modal fade" id="newarm-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title" id="myModalLabel">New Arm</h4>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    </div>
+    <form action="/arms" accept-charset="UTF-8" method="post">
+      <div class="modal-body">
+          <div class="form-row">
+            <div class="form-group col-sm-6">
+              <%#=f.label 'Serial Number' %>
+              <%#= f.text_field :srl_num, class: "form-control", required: "true"%>
+              <label for="arm_srl_num">Serial Number</label>
+              <input type="text" class="form-control" name="arm[srl_num]" id="arm_srl_num" required>
+            </div>
+            <div class="form-group col-md-6">
+              <%#= f.label :arm_name %>
+              <%#= f.text_field :arm_name, class:"form-control", required: "true" %>
+              <label for="arm_arm_name">Arm Name</label>
+              <input class="form-control" name="arm[arm_name]" id="arm_arm_name" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-sm-6">
+              <%#=f.label :arm_type %>
+              <label for="arm_arm_type">Arm Type</label>
+              <select class="form-control" name="arm[arm_type]" id="arm_arm_type" required>
+                <option>Select Arm Type</option>
+                <option value="Heavy">Heavy</option>
+                <option value="Small">Small</option>
+                <option value="Light">Light</option>
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+              <%#= f.label "Serviceability" %>
+              <label for="arm_service_b">Serviceability</label>
+              <select class="form-control" name="arm[service_b]" id="arm_service_b" required>
+                <option>Select Serviceability</option>
+                <option value="Serviceable">Serviceable</option>
+                <option value="Unserviceable">Unserviceable</option>
+              </select>
+            </div>
+          </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-success">Save</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+</div>

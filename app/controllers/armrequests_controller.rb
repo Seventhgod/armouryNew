@@ -2,11 +2,16 @@ class ArmrequestsController < ApplicationController
   layout 'application'
   def index
     @armreq = Armrequest.all.where('return_status = ?', 'Unreturned')
+    @armmsss = Armrequest.new
+    @arm = Arm.all.select('arm_name')
   end
 
   def new
     @armreq = Armrequest.new
     @arm = Arm.all.select('arm_name')
+    respond_to do |format|
+      format.js
+    end
   end
 
   def create
@@ -96,9 +101,22 @@ class ArmrequestsController < ApplicationController
     end
   end
 
+  def ajaxdelete
+    @armreq = Armrequest.find(params[:id])
+    @armreq.destroy
+
+    respond_to do |format|
+      format.json
+      format.html
+    end
+  end
   private
   def armreqparams
     params.require(:armrequest).permit(:personnel, :arm, :srl_num, :user, :request_date, :return_status)
+  end
+
+  def armrepams
+    params.permit(:personnel, :arm, :srl_num, :user, :request_date, :return_status)
   end
 
 end

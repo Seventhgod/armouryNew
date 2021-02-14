@@ -1,0 +1,173 @@
+<div class="modal fade" id="newarmreq-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">New Arm Request</h4><b style="padding-left: 10%"><select class="form-control" name="option" id="option">
+        <option>-- Select Option --</option>
+        <option value="Officer">Officer</option>
+        <option value="Soldier">Soldier</option>
+      </select></b>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <form action="/armrequests" accept-charset="UTF-8" method="post">
+        <div class="modal-body">
+            <div class="form-row">
+              <div class="form-group col-sm-6">
+                <%#=f.label :personnel %>
+                <label for="armrequest_personnel"> Personnel </label>
+                <select class="form-control" id="armrequest_personnel" name="armrequest[personnel]">
+                  <option>-- Pick Service Number --</option>
+                </select>
+              </div>
+              <div class="form-group col-md-6">
+                <%#=f.label :arm %>
+                <label for="armrequest_arm"> Arm </label>
+                <select class="form-control" name="armrequest[arm]" id="armrequest_arm" required>
+                  <option>Select Arm</option>
+                  <%= @arm.each do |arm| %>
+                    <option value="<%= arm.arm_name %>"><%= arm.arm_name %></option>
+                  <% end %>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-sm-6">
+                <%#= f.label "Serial Number" %>
+                <label for="armrequest_srl_num"> Serial Number </label>
+                <select class="form-control" name="armrequest[srl_num]" id="armrequest_srl_num" required>
+                  <option>-- Select Serial Number --</option>
+                </select>
+              </div>
+              <div class="form-group col-md-6">
+                <%#= f.label :user %>
+                <%#= f.text_field :user, class:"form-control", readonly: "true", value: current_user.name %>
+                <label for="armrequest_user">User</label>
+                <input type="text" class="form-control" name="armrequest[user]" id="armrequest_user" value="<%= current_user.name %>" readonly required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <%#= f.label :request_date %>
+                <%#= f.date_field :request_date, class:"form-control" %>
+                <label for="armrequest_request_date">Request Date</label>
+                <input type="date" class="form-control" name="armrequest[request_date]" id="armrequest_request_date">
+              </div>
+
+              <div class="form-group col-md-6">
+                <%#= f.label :return_status %>
+                <%#= f.text_field :return_status, class:"form-control", readonly: "true", value: "Unreturned" %>
+                <label for="armrequest_return_status"> Return Status</label>
+                <input class="form-control" name="armrequest[return_status]" id="armrequest_return_status" value="Unreturned" readonly>
+              </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-success">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script>
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('select[name="armrequest[arm]"]').on('change', function () {
+            var arm = $(this).val();
+            if(arm){
+                $.ajax({
+                    url: '/getarmname/',
+                    type: "GET",
+                    dataType: "json",
+                    data: {arm:arm},
+                    beforeSend:function () {
+                        $('loader').css("visibility", "visible");
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('AJAX ERROR' + status + error)
+                    },
+                    success: function (response) {
+                        $('select[name="armrequest[srl_num]"]').empty();
+                        console.log(response);
+                        var arm_srl = response["srl_num"];
+                        console.log(arm_srl);
+                        $('select[name="armrequest[srl_num]"]').append('<option>-- Select Serial Number --</option>');
+                        for(var i =0; i < arm_srl.length; i++){
+                            $('select[name="armrequest[srl_num]"]').append('<option value="' + arm_srl[i]["srl_num"] + '">' + arm_srl[i]["srl_num"] + '</option>');
+                        }
+                    },
+                    complete:function () {
+                        $('#loader').css("visibility", "hidden");
+                    }
+                });
+            }
+            else{
+                $('select[name="armrequest[srl_num]"]').empty();
+            }
+        })
+    })
+</script>
+<script type="text/javascript">
+    $(document).ready(function (){
+        $('select[name="option"]').on('change', function (){
+            var choice = $(this).val();
+            if(choice === "Soldier"){
+                $.ajax({
+                    url: '/getsoldiers',
+                    type: 'GET',
+                    dataType: "json",
+                    beforeSend: function(){
+                        $('#loader').css("visibility", "visible");
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('AJAX Error: ' + status + error);
+                    },
+                    success:function (response) {
+                        $('select[name="armrequest[personnel]"]').empty();
+                        console.log(response);
+                        var svc_number = response["svc_number"];
+                        console.log(svc_number)
+                        $('select[name="armrequest[personnel]"]').append('<option>-- Pick Service Number --</option>');
+                        for(var i = 0; i < svc_number.length; i++){
+                            $('select[name="armrequest[personnel]"]').append('<option value="' + svc_number[i]["svc_number"] + '">' +svc_number[i]["svc_number"] + '</option>');
+                        }
+                    },
+                    complete: function(){
+                        $('#loader').css("visibility", "hidden");
+                    }
+                });
+            }
+            if (choice === "Officer"){
+                $.ajax({
+                    url: '/getofficers',
+                    type: 'GET',
+                    dataType: "json",
+                    beforeSend: function(){
+                        $('#loader').css("visibility", "visible");
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('AJAX Error: ' + status + error);
+                    },
+                    success:function (response) {
+                        $('select[name="armrequest[personnel]"]').empty();
+                        console.log(response);
+                        var svc_number = response["svc_number"];
+                        console.log(svc_number)
+                        $('select[name="armrequest[personnel]"]').append('<option>-- Pick Service Number --</option>');
+                        for(var i = 0; i < svc_number.length; i++){
+                            $('select[name="armrequest[personnel]"]').append('<option value="' + svc_number[i]["svc_number"] + '">' +svc_number[i]["svc_number"] + '</option>');
+                        }
+                    },
+                    complete: function(){
+                        $('#loader').css("visibility", "hidden");
+                    }
+                });
+            }
+            else{
+                $('select[name="armrequest[personnel]"]').empty();
+            }
+        })
+    })
+</script>

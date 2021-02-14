@@ -2,10 +2,14 @@ class ArmsController < ApplicationController
   layout 'application'
   def index
     @arms = Arm.all
+    @armss = Arm.new
   end
 
   def new
     @arms = Arm.new
+    respond_to do |format|
+      format.js
+    end
   end
 
   def create
@@ -45,8 +49,21 @@ class ArmsController < ApplicationController
     redirect_to arms_path
   end
 
+  def ajaxdelete
+    @arms = Arm.find(params[:id])
+    @arms.destroy
+
+    respond_to do |format|
+      format.json
+      format.html
+    end
+  end
   private
   def arms_params
     params.require(:arm).permit(:srl_num, :arm_name, :arm_type, :service_b)
+  end
+
+  def ajax_arms_params
+    params.permit(:srl_num, :arm_name, :arm_type, :service_b)
   end
 end

@@ -18,5 +18,7 @@ Rails.application.routes.draw do
   get '/getarmname', to: 'armrequests#getarms'
   get '/getsoldiers', to: 'armrequests#getsoldiers'
   get '/getofficers', to: 'armrequests#getofficers'
+  get 'delarmreq', to: 'armrequests#ajaxdelete'
+  get 'delarm', to: 'arms#ajaxdelete'
   mount Sidekiq::Web => '/sidekiq'
 end

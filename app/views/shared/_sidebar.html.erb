@@ -14,21 +14,19 @@
       </li>
 
       <li class="menu-header">Controllers</li>
-      <li class="dropdown">
-        <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-archive"></i> <span>Arms</span></a>
-        <ul class="dropdown-menu">
-          <li><a class="nav-link" href="/arms">Arms Table</a></li>
-          <li><a class="nav-link" href="/arms/new">New Arm</a></li>
-        </ul>
+      <li class="<%= active_nav_item('arms', 'index') %>">
+        <%= link_to arms_path, class: "nav-link" do %>
+          <i class="fas fa-archive"></i> <span>Arms</span>
+        <% end %>
       </li>
 
-      <li class="dropdown">
-        <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Arm Requests</span></a>
-        <ul class="dropdown-menu">
-          <li><a class="nav-link" href="/armrequests">Requests Table</a></li>
-          <li><a class="nav-link" href="/armrequests/new">New Request</a></li>
-        </ul>
+      <li class="<%= active_nav_item('armrequests', 'index') %>">
+        <%= link_to armrequests_path, class: "nav-link" do %>
+          <i class="fas fa-columns"></i> <span>Arm Requests</span>
+        <% end %>
       </li>
+
+
 
       <li class="menu-header">Personnel</li>
       <li class="dropdown">

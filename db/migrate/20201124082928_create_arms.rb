@@ -5,7 +5,7 @@ class CreateArms < ActiveRecord::Migration[6.0]
       t.string :arm_name
       t.string :arm_type
       t.integer :quantity
-      t.string :servicability
+      t.string :service_b
 
       t.timestamps
     end

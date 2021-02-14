@@ -20,7 +20,7 @@
       <div class="col-12 col-md-12 col-lg-12">
         <div class="card">
           <div class="card-header">
-            <h4>Requests</h4><b style="padding-left: 80%"><a class="btn btn-success " href="/armrequests/new">New Request</a></b>
+            <h4>Requests</h4><b style="padding-left: 80%"><%= link_to 'New', new_armrequest_path,  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#newarmreq-modal', class: 'btn btn-primary btn-lg', id: 'new-arm-req'}  %></b>
           </div>
           <div class="card-body">
             <div class="table-responsive">
@@ -49,7 +49,7 @@
                     <td><%= armreq.return_date %></td>
                     <td><a class="btn btn-icon btn-info" href="/armrequests/<%= armreq.id %>"><i class="fas fa-info-circle"></i></a></td>
                     <td><a class="btn btn-icon btn-primary" href="/armrequests/<%= armreq.id %>/edit"><i class="far fa-edit"></i></a></td>
-                    <td><a data-confirm="Are you sure?" class="btn btn-icon btn-danger" rel="nofollow" data-method="delete" href="/armrequests/<%= armreq.id %>"><i class="fas fa-times"></i></a></td>
+                    <td><a class="btn btn-icon btn-danger" rel="nofollow" id="armreq-del" data-id="<%= armreq.id %>" href="javascript:void(0)"><i class="fas fa-times"></i></a></td>
                   </tr>
                 <% end %>
                 </tbody>
@@ -61,6 +61,7 @@
     </div>
   </div>
 </div>
+<div id="newarm-content"></div>
 <script>
   $(document).ready(function () {
       $('#approve').change(function () {
@@ -73,9 +74,41 @@
               url: '/updatereqstat',
               data: {'status': status, 'id': id},
               success: function(data){
-                  console.log(data.success)
+                  location.reload()
+                  console.log(data);
               }
           });
+      })
+  })
+
+  $('#new-arm-req').on('click', function () {
+      $('#newarm-content').html("<%= j render 'new', armrequest: @armmsss %>");
+      $('#newarmreq-modal').modal('show');
+  })
+
+  $('#armreq-del').on('click', function (){
+      let id = $(this).data("id");
+      swal({
+          title: "Are you sure?",
+          text: "Once deleted, you will not be able to recover data!",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+      })
+      .then((result)=>{
+          if(result){
+              $.ajax({
+                  url: 'delarmreq',
+                  method: "GET",
+                  data:{'id':id},
+                  dataType: "json"
+              }).done(function(response){
+                  swal('Deleted!','Request Made has been Deleted', 'success');
+                  location.reload()
+              }).fail(function () {
+                  swal('Sorry...','Something went wrong', 'error')
+              })
+          }
       })
   })
 </script>
